@@ -11,7 +11,6 @@ def largest_square(grid):
     best_pos = None # best_pos (where sq starts)
     best_val = None # best_val (num inside)
 
-
     for row in range(n): # for each row
         for col in range(n): # for each col
 
@@ -35,6 +34,43 @@ def largest_square(grid):
                             break
                     if not valid_sq:
                         break
-                        
+                # if all cells equal the top left val
+                if valid_sq:
+                    # update largest if this sq is bigger
+                    if size > largest:
+                        largest = size
+                        best_val = val
+                        best_pos = (row, col)
+                else:
+                    # stop checking larger squares in the pos
+                    break
+    # return largest sq size so far, val inside, and position
+    return largest, best_val, best_pos 
+
+    
+# test cases
+# expected output: (1, 5, (0, 0))
+print(largest_square([[5]])) # smallest possible grid
+
+# expected output: (2, 2, (0, 0))
+print(largest_square([ # all nums the same
+    [2, 2],
+    [2, 2]
+]))
+
+# expected output: (1, 1, (0, 0))
+print(largest_square([
+    [1, 2], # no 2x2 square exits
+    [3, 4]
+]))
+
+# expected output: (3, 2, (0, 1))
+print(largest_square([
+    [1, 2, 2, 2, 3], # 3x3 square of 2's inside
+    [4, 2, 2, 2, 5],
+    [6, 2, 2, 2, 7],
+    [8, 9, 9, 9, 0],
+    [1, 1, 1, 1, 1]
+]))
 
 
